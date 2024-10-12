@@ -63,7 +63,7 @@ const App: React.FC = () => {
             fontFamily="Arial"
           >
             <Typography variant="h4" component="h1" gutterBottom>
-              SnipShot: Code Snippet Uploader
+              Code Snippet Uploader
             </Typography>
 
             <LanguageSelector language={language} setLanguage={setLanguage} />
