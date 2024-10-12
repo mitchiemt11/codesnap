@@ -5,13 +5,14 @@ import { CodeInput } from './components/CodeInput';
 import { SubmitButton } from './components/SubmitButton';
 import { SnippetImage } from './components/SnippetImage';
 import { ErrorModal } from './components/ErrorModal';
+import { SnippetRenderer } from './components/SnippetRenderer';
 import { useSnippetUploader } from './hooks/useSnippetUploader';
 import { Language } from './types';
 
 const App: React.FC = () => {
   const [language, setLanguage] = useState<Language>('javascript');
   const [codeContent, setCodeContent] = useState<string>('');
-  const { uploadSnippet, imageUrl, error, loading, setError } = useSnippetUploader();
+  const { uploadSnippet, imageUrl, error, loading, setError, snippetRef } = useSnippetUploader();
 
   const handleSubmission = () => {
     if (!codeContent) {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
       <SubmitButton onClick={handleSubmission} loading={loading} />
       {imageUrl && <SnippetImage imageUrl={imageUrl} language={language} />}
       <ErrorModal error={error} onClose={() => setError(null)} />
+      <SnippetRenderer ref={snippetRef} codeContent={codeContent} language={language} />
     </Box>
   );
 };

@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { pinata } from '../utils/config';
 import html2canvas from 'html2canvas';
-import 'highlight.js/styles/vs2015.css';
 import { Language } from '../types';
 
 export const useSnippetUploader = () => {
