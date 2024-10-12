@@ -57,6 +57,7 @@ function App() {
       console.error(error);
     } finally {
       setLoading(false);
+      setCodeContent("");
     }
   };
   
@@ -104,7 +105,7 @@ function App() {
       </FormControl>
 
       <TextField
-        label="Code"
+        label="Enter your code here"
         value={codeContent}
         onChange={(e) => setCodeContent(e.target.value)}
         multiline
