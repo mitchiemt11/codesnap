@@ -14,12 +14,15 @@ const App: React.FC = () => {
   const [codeContent, setCodeContent] = useState<string>('');
   const { uploadSnippet, imageUrl, error, loading, setError, snippetRef } = useSnippetUploader();
 
-  const handleSubmission = () => {
+  const handleSubmission = async () => {
     if (!codeContent) {
       setError('Please provide code content.');
       return;
     }
-    uploadSnippet(codeContent, language);
+    const success = await uploadSnippet(codeContent, language);
+    if (success) {
+      setCodeContent(''); // Clear the code content after successful submission
+    }
   };
 
   return (

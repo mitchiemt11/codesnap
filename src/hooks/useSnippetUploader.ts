@@ -6,11 +6,10 @@ import { Language } from '../types';
 export const useSnippetUploader = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [_, setContent] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const snippetRef = useRef<HTMLDivElement>(null);
 
-  const uploadSnippet = async (codeContent: string, language: Language) => {
+  const uploadSnippet = async (codeContent: string, language: Language): Promise<boolean> => {
     setLoading(true);
     setError(null);
     setImageUrl(null);
@@ -32,19 +31,19 @@ export const useSnippetUploader = () => {
 
         if (image) {
           setImageUrl(image);
+          snippetRef.current.style.display = 'none';
+          return true; // Indicate successful upload
         } else {
           throw new Error('Captured image is empty.');
         }
-
-        snippetRef.current.style.display = 'none';
       } else {
         throw new Error('Snippet reference is null.');
       }
     } catch (error: unknown) {
       setError(`Failed to upload snippet: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      return false; // Indicate failed upload
     } finally {
       setLoading(false);
-      setContent('');
     }
   };
 
