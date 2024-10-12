@@ -6,6 +6,7 @@ import { Language } from '../types';
 export const useSnippetUploader = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [_, setContent] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const snippetRef = useRef<HTMLDivElement>(null);
 
@@ -43,6 +44,7 @@ export const useSnippetUploader = () => {
       setError(`Failed to upload snippet: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
+      setContent('');
     }
   };
 

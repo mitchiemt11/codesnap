@@ -40,7 +40,12 @@ const App: React.FC = () => {
       <SubmitButton onClick={handleSubmission} loading={loading} />
       {imageUrl && <SnippetImage imageUrl={imageUrl} language={language} />}
       <ErrorModal error={error} onClose={() => setError(null)} />
-      <SnippetRenderer ref={snippetRef} codeContent={codeContent} language={language} />
+      <SnippetRenderer 
+        ref={snippetRef} 
+        codeContent={codeContent} 
+        language={language} 
+        spacesPerIndent={2}
+      />
     </Box>
   );
 };
