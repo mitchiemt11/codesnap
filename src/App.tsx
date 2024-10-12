@@ -18,31 +18,37 @@ function App() {
       setError("Please provide code content.");
       return;
     }
-
+  
     setLoading(true);
     setError(null);
     setImageUrl(null);
-
+  
     try {
       const blob = new Blob([codeContent], { type: "text/plain" });
       const file = new File([blob], `snippet.${language}`, { type: "text/plain" });
       const upload = await pinata.upload.file(file);
-
+  
       await pinata.gateways.createSignedURL({
         cid: upload.cid,
         expires: 30,
       });
-
-      // Generate the snippet image
+  
+      // Show the snippet element temporarily for rendering
       if (snippetRef.current) {
+        snippetRef.current.style.display = 'block';
+  
+        // Generate the snippet image
         const canvas = await html2canvas(snippetRef.current);
         const image = canvas.toDataURL("image/png");
-
+  
         if (image) {
           setImageUrl(image);
         } else {
           throw new Error("Captured image is empty.");
         }
+  
+        // Hide the snippet element again
+        snippetRef.current.style.display = 'none';
       } else {
         throw new Error("Snippet reference is null.");
       }
@@ -53,6 +59,7 @@ function App() {
       setLoading(false);
     }
   };
+  
 
   const handleDownload = () => {
     if (imageUrl) {
