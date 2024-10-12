@@ -3,6 +3,7 @@ import { pinata } from "./utils/config";
 import hljs from "highlight.js";
 import "highlight.js/styles/vs2015.css";
 import html2canvas from "html2canvas";
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Typography, Box, CircularProgress } from '@mui/material';
 
 function App() {
   const [language, setLanguage] = useState<string>("javascript");
@@ -32,11 +33,11 @@ function App() {
         expires: 30,
       });
 
-     
+      // Generate the snippet image
       if (snippetRef.current) {
         const canvas = await html2canvas(snippetRef.current);
         const image = canvas.toDataURL("image/png");
-        
+
         if (image) {
           setImageUrl(image);
         } else {
@@ -63,65 +64,91 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Code Snippet Uploader</h1>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      p={4}
+      fontFamily="Arial"
+    >
+      <Typography variant="h4" component="h1" gutterBottom>
+        Code Snippet Uploader
+      </Typography>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <div style={{ marginBottom: "10px" }}>
-        <label style={{ marginRight: "10px" }}>Language: </label>
-        <select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-          style={{ padding: "5px", width: "200px" }}
-        >
-          <option value="javascript">JavaScript</option>
-          <option value="python">Python</option>
-          <option value="java">Java</option>
-          <option value="cpp">C++</option>
-          {/* Add more languages as needed */}
-        </select>
-      </div>
-
-      <div style={{ marginBottom: "10px" }}>
-        <label style={{ marginRight: "10px" }}>Code: </label>
-        <textarea
-          value={codeContent}
-          onChange={(e) => setCodeContent(e.target.value)}
-          rows={10}
-          cols={50}
-          style={{ padding: "10px", fontFamily: "monospace" }}
-        />
-      </div>
-
-      <button
-        onClick={handleSubmission}
-        style={{ padding: "10px 20px", cursor: "pointer" }}
-        disabled={loading}
-      >
-        {loading ? "Submitting..." : "Submit"}
-      </button>
-
-      {imageUrl && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>Generated Snippet Image:</h2>
-          <img src={imageUrl} alt="Snippet" style={{ maxWidth: "100%", borderRadius: "10px" }} />
-          <button onClick={handleDownload} style={{ padding: "10px 20px", marginTop: "10px" }}>
-            Download Snippet Image
-          </button>
-        </div>
+      {error && (
+        <Typography color="error" gutterBottom>
+          {error}
+        </Typography>
       )}
 
-      {/* Hidden code block for html2canvas to capture */}
-      <div
+      <FormControl fullWidth margin="normal" sx={{ maxWidth: 400 }}>
+        <InputLabel>Language</InputLabel>
+        <Select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          label="Language"
+        >
+          <MenuItem value="javascript">JavaScript</MenuItem>
+          <MenuItem value="python">Python</MenuItem>
+          <MenuItem value="java">Java</MenuItem>
+          <MenuItem value="cpp">C++</MenuItem>
+        </Select>
+      </FormControl>
+
+      <TextField
+        label="Code"
+        value={codeContent}
+        onChange={(e) => setCodeContent(e.target.value)}
+        multiline
+        rows={10}
+        fullWidth
+        margin="normal"
+        InputProps={{ sx: { fontFamily: 'monospace' } }}
+        sx={{ maxWidth: 600 }}
+      />
+
+      <Box mt={2}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmission}
+          disabled={loading}
+        >
+          {loading ? <CircularProgress size={24} /> : 'Submit'}
+        </Button>
+      </Box>
+
+      {imageUrl && (
+        <Box mt={4} textAlign="center">
+          <Typography variant="h6">Generated Snippet Image:</Typography>
+          <Box mt={2}>
+            <img
+              src={imageUrl}
+              alt="Snippet"
+              style={{ maxWidth: '100%', borderRadius: '10px' }}
+            />
+          </Box>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleDownload}
+            sx={{ mt: 2 }}
+          >
+            Download Snippet Image
+          </Button>
+        </Box>
+      )}
+
+      <Box
         ref={snippetRef}
-        style={{
-          padding: !imageUrl ? '0px' : '20px',
-          backgroundColor: "#1e1e1e", // Dark background like VSCode
-          color: "#dcdcdc", // Text color for dark theme
-          borderRadius: "10px", // Rounded borders
+        sx={{
+          p: 3,
+          backgroundColor: "#1e1e1e",
+          color: "#dcdcdc",
+          borderRadius: 2,
+          display: "none",
           fontFamily: "monospace",
-          display: "block", // Ensure it's displayed for capture
         }}
       >
         <pre>
@@ -131,8 +158,8 @@ function App() {
             }}
           />
         </pre>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 
