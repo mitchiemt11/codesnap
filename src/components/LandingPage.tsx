@@ -39,7 +39,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
           SnipShot 📸
         </Typography>
         <Typography variant="h4" component="h2" gutterBottom>
-          A Stylish Code Snippet Uploader Using Pinata IPFS
+          A Stylish Code Snippet Uploader
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
           No sign up required
