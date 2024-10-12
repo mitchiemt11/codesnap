@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { pinata } from "./utils/config";
 import hljs from "highlight.js";
-import "highlight.js/styles/vs2015.css"; // Dark theme similar to VSCode
+import "highlight.js/styles/vs2015.css";
 import html2canvas from "html2canvas";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 
     setLoading(true);
     setError(null);
-    setImageUrl(null); // Reset image URL before new submission
+    setImageUrl(null);
 
     try {
       const blob = new Blob([codeContent], { type: "text/plain" });
@@ -32,13 +32,13 @@ function App() {
         expires: 30,
       });
 
-      // Ensure that the code block is visible before capturing it
+     
       if (snippetRef.current) {
         const canvas = await html2canvas(snippetRef.current);
         const image = canvas.toDataURL("image/png");
         
         if (image) {
-          setImageUrl(image); // Set image only if it's not empty
+          setImageUrl(image);
         } else {
           throw new Error("Captured image is empty.");
         }
@@ -57,7 +57,7 @@ function App() {
     if (imageUrl) {
       const link = document.createElement("a");
       link.href = imageUrl;
-      link.download = `snippet-${language}.png`; // Name of the downloaded file
+      link.download = `snippet-${language}.png`;
       link.click();
     }
   };
