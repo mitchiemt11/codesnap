@@ -104,20 +104,6 @@ To run SnipShot locally for development purposes:
    ```
 3. Open [http://localhost:3000](http://localhost:3000) in your browser to access the app.
 
-## Deployment
-
-SnipShot can be hosted using Vercel. To deploy the app:
-
-1. Create a Vercel account at [Vercel](https://vercel.com).
-2. Link the project to your Vercel account.
-3. Add the necessary environment variables in your Vercel project settings.
-4. Deploy the application:
-   ```bash
-   vercel deploy
-   ```
-
-Your app will be deployed at `https://your-app-name.vercel.app`.
-
 ## Contributing
 
 Contributions are welcome! Here's how you can contribute:
