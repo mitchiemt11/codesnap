@@ -1,8 +1,8 @@
 # SnipShot
 
-SnipShot is a stylish code snippet uploader that leverages API technology to format and beautify code snippets. The app uses Pinata for secure, decentralized storage of all generated snippet images, ensuring users can easily store and share their creations.
+SnipShot is a stylish code snippet uploader that leverages API technology to format and beautify code snippets. The app uses Pinata for secure, decentralized storage of all generated snippet images, ensuring users can easily store and share their creations
 
-This project was built using modern technologies, including React, Vite, TypeScript, Material-UI for the user interface, and hosted with Vercel for seamless deployment.
+This project was built using modern technologies, including React, Vite, TypeScript, Material-UI for the user interface, and hosted with Vercel for seamless deployment
 
 ## Table of Contents
 - [Tech Stack](#tech-stack)
@@ -109,8 +109,8 @@ To run SnipShot locally for development purposes:
 Contributions are welcome! Here's how you can contribute:
 
 1. Fork the repository.
-2. Create a new feature branch (`git checkout -b feature/your-feature-name`).
-3. Make your changes and commit them (`git commit -m 'Add new feature'`).
+2. Create a new feature branch (`git checkout -b feature/your-feature-name`)
+3. Make your changes and commit them (`git commit -m 'Add new feature'`)
 4. Push to the branch (`git push origin feature/your-feature-name`).
 5. Open a pull request.
 
